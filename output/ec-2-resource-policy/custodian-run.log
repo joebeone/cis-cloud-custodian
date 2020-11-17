@@ -1,0 +1,2 @@
+2020-11-17 10:23:32,920 - custodian.policy - INFO - policy:ec-2-resource-policy resource:aws.ec2 region:us-east-2 count:2 time:1.46
+2020-11-17 10:26:27,858 - custodian.policy - INFO - policy:ec-2-resource-policy resource:aws.ec2 region:us-east-2 count:2 time:0.00

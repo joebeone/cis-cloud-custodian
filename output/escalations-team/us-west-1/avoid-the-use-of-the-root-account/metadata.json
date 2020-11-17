@@ -1,0 +1,77 @@
+{
+  "policy": {
+    "name": "avoid-the-use-of-the-root-account",
+    "resource": "account",
+    "description": "AUDIT NOTIFICATION: CIS Benchmark 1.1 - Avoid the use of the root account The root account is the most privileged AWS account.",
+    "mode": {
+      "type": "cloudtrail",
+      "role": "arn:aws:iam::308413130039:role/red-river-cloud-custodian",
+      "events": [
+        "ConsoleLogin"
+      ],
+      "tags": {
+        "custodian-info": "mode=cloudtrail:version=0.9.6"
+      }
+    },
+    "filters": [
+      {
+        "type": "event",
+        "key": "detail.userIdentity.type",
+        "value_type": "swap",
+        "op": "in",
+        "value": "Root"
+      }
+    ],
+    "actions": [
+      {
+        "type": "notify",
+        "template": "default.html",
+        "priority_header": 1,
+        "subject": "Root User Login Detected! - [{{ account }} - {{ region }}]",
+        "violation_desc": "A User Has Logged Into the AWS Console With The Root User:",
+        "action_desc": "Reference: CIS 1.1 Benchmark. Minimizing the use of this account.",
+        "to": [
+          "jbennett@webrapids.com",
+          "joe.bennett@redriver.com"
+        ],
+        "transport": {
+          "type": "sqs",
+          "queue": "https://sqs.us-east-2.amazonaws.com/308413130039/redriver-cloud-custodian",
+          "region": "us-east-2"
+        }
+      }
+    ]
+  },
+  "version": "0.9.6",
+  "execution": {
+    "id": "7164b821-7d22-4060-831a-2903ec481f64",
+    "start": 1605632006.3353093,
+    "end_time": 1605632008.9083085,
+    "duration": 2.5729992389678955
+  },
+  "config": {
+    "region": "us-west-1",
+    "regions": [],
+    "cache": "C:\\Users\\joe.bennett/.cache/c7n-org\\308413130039-us-west-1.cache",
+    "profile": "riversysops",
+    "account_id": "308413130039",
+    "assume_role": null,
+    "external_id": null,
+    "log_group": null,
+    "tracer": "default",
+    "metrics_enabled": true,
+    "metrics": null,
+    "output_dir": "output\\escalations-team\\us-west-1",
+    "cache_period": 15,
+    "dryrun": false,
+    "authorization_file": null
+  },
+  "sys-stats": {},
+  "api-stats": {
+    "lambda.GetFunction": 1,
+    "events.DescribeRule": 1,
+    "lambda.AddPermission": 1,
+    "events.ListTargetsByRule": 1
+  },
+  "metrics": []
+}

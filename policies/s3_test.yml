@@ -1,0 +1,11 @@
+policies:
+  - name: s3-bucket-encryption-policy-absent
+    resource: s3
+    description: s3 buckets without encryption required 
+    filters:
+      - type: no-encryption-statement
+    actions:
+      - type: post-finding
+        severity_normalized: 30
+        types:
+          - "Software and Configuration Checks/AWS Security Best Practices"

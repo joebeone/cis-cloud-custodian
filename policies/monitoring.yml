@@ -1,0 +1,31 @@
+policies:
+  - name: avoid-the-use-of-the-root-account
+    resource: s3
+    description: "AUDIT NOTIFICATION: CIS Benchmark 3.8 - Ensure a log metric filter and alarm exist for S3 bucket policy changes. Sets up cloudwatch metric and log base on CloudTrail Events"
+    mode:
+       type: cloudtrail
+       role: "{custodian_role}"
+       events:
+          - ConsoleLogin
+    filters:
+    #TODO Can we setup multiple cloudtrails? Should we setup a redriver CloudTrail? 
+    #Find multi-region CloudTrail with Management Events and CloudTrail Metric
+       - type: event
+         key: "detail.userIdentity.type"
+         value_type: swap
+         op: in
+         value: Root
+    actions:
+      - type: notify
+        template: default.html
+        priority_header: 1
+        subject: "S3 Bucket Policy Change - [{{ account }} - {{ region }}]"
+        violation_desc: "Monitoring changes to S3 bucket policies may reduce time to detect and correct permissive policies on sensitive S3 buckets."
+        action_desc: "Reference: CIS 3.8 Benchmark. Ensure a log metric filter and alarm exist for S3 bucket policy changes."
+        to:
+          - jbennett@webrapids.com
+          - joe.bennett@redriver.com
+        transport:
+          type: sqs
+          queue: "{mailer_sqs_url}"
+          region: us-east-2

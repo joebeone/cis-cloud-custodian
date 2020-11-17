@@ -1,0 +1,4 @@
+queue_url: https://sqs.us-east-2.amazonaws.com/308413130039/redriver-cloud-custodian
+role: arn:aws:iam::308413130039:role/red-river-cloud-custodian
+from_address: jbennett@webrapids.com
+region: us-east-2

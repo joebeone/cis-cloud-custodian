@@ -1,0 +1,26 @@
+policies:
+  - name: account-check-config-services
+    resource: account
+    filters:
+      - type: check-config
+        all-resources: true
+        global-resources: true
+        running: true
+    mode:
+       type: periodic
+       schedule: rate(1 minute)
+       role: "{custodian_role}"
+    actions:
+      - type: notify
+        template: default.html
+        priority_header: 1
+        subject: "2.5 Ensure AWS Config is enabled - [{{ account }} - {{ region }}]"
+        violation_desc: "AWS Config is a web service that performs configuration management of supported AWS resources within your account and delivers log files to you. The recorded information includes the configuration item (AWS resource), relationships between configuration items (AWS resources), and any configuration changes between resources. It is recommended to enable AWS Config in all regions."
+        action_desc: "Reference: CIS 2.5 Benchmark."
+        to:
+          - jbennett@webrapids.com
+          - joe.bennett@redriver.com
+        transport:
+          type: sqs
+          queue: "{mailer_sqs_url}"
+          region: us-east-2

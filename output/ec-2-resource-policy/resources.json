@@ -1,0 +1,236 @@
+[
+  {
+    "AmiLaunchIndex": 0,
+    "ImageId": "ami-07c8bc5c1ce9598c3",
+    "InstanceId": "i-003034e2cf9500548",
+    "InstanceType": "t2.micro",
+    "KeyName": "EC2_Testing",
+    "LaunchTime": "2020-08-20T20:21:32+00:00",
+    "Monitoring": {
+      "State": "disabled"
+    },
+    "Placement": {
+      "AvailabilityZone": "us-east-2c",
+      "GroupName": "",
+      "Tenancy": "default"
+    },
+    "PrivateDnsName": "ip-172-31-43-86.us-east-2.compute.internal",
+    "PrivateIpAddress": "172.31.43.86",
+    "ProductCodes": [],
+    "PublicDnsName": "",
+    "State": {
+      "Code": 80,
+      "Name": "stopped"
+    },
+    "StateTransitionReason": "User initiated (2020-09-03 19:27:23 GMT)",
+    "SubnetId": "subnet-aaf395e6",
+    "VpcId": "vpc-a4954dcf",
+    "Architecture": "x86_64",
+    "BlockDeviceMappings": [
+      {
+        "DeviceName": "/dev/xvda",
+        "Ebs": {
+          "AttachTime": "2020-08-20T20:21:33+00:00",
+          "DeleteOnTermination": true,
+          "Status": "attached",
+          "VolumeId": "vol-011f499f7984bad60"
+        }
+      }
+    ],
+    "ClientToken": "",
+    "EbsOptimized": false,
+    "EnaSupport": true,
+    "Hypervisor": "xen",
+    "NetworkInterfaces": [
+      {
+        "Attachment": {
+          "AttachTime": "2020-08-20T20:21:32+00:00",
+          "AttachmentId": "eni-attach-0a288e48936f9307c",
+          "DeleteOnTermination": true,
+          "DeviceIndex": 0,
+          "Status": "attached"
+        },
+        "Description": "Primary network interface",
+        "Groups": [
+          {
+            "GroupName": "launch-wizard-1",
+            "GroupId": "sg-08dba2380e835e2b3"
+          }
+        ],
+        "Ipv6Addresses": [],
+        "MacAddress": "0a:cd:f9:55:86:32",
+        "NetworkInterfaceId": "eni-06fe7621e50d65cb5",
+        "OwnerId": "308413130039",
+        "PrivateDnsName": "ip-172-31-43-86.us-east-2.compute.internal",
+        "PrivateIpAddress": "172.31.43.86",
+        "PrivateIpAddresses": [
+          {
+            "Primary": true,
+            "PrivateDnsName": "ip-172-31-43-86.us-east-2.compute.internal",
+            "PrivateIpAddress": "172.31.43.86"
+          }
+        ],
+        "SourceDestCheck": true,
+        "Status": "in-use",
+        "SubnetId": "subnet-aaf395e6",
+        "VpcId": "vpc-a4954dcf",
+        "InterfaceType": "interface"
+      }
+    ],
+    "RootDeviceName": "/dev/xvda",
+    "RootDeviceType": "ebs",
+    "SecurityGroups": [
+      {
+        "GroupName": "launch-wizard-1",
+        "GroupId": "sg-08dba2380e835e2b3"
+      }
+    ],
+    "SourceDestCheck": true,
+    "StateReason": {
+      "Code": "Client.UserInitiatedShutdown",
+      "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+    },
+    "Tags": [
+      {
+        "Key": "rrBackupSystem",
+        "Value": "Custodian"
+      },
+      {
+        "Key": "maid_status",
+        "Value": ""
+      }
+    ],
+    "VirtualizationType": "hvm",
+    "CpuOptions": {
+      "CoreCount": 1,
+      "ThreadsPerCore": 1
+    },
+    "CapacityReservationSpecification": {
+      "CapacityReservationPreference": "open"
+    },
+    "HibernationOptions": {
+      "Configured": false
+    },
+    "MetadataOptions": {
+      "State": "applied",
+      "HttpTokens": "optional",
+      "HttpPutResponseHopLimit": 1,
+      "HttpEndpoint": "enabled"
+    }
+  },
+  {
+    "AmiLaunchIndex": 0,
+    "ImageId": "ami-07c8bc5c1ce9598c3",
+    "InstanceId": "i-0cf13f9fc8d5ca4cd",
+    "InstanceType": "t2.micro",
+    "KeyName": "EC2_Testing",
+    "LaunchTime": "2020-08-21T19:55:44+00:00",
+    "Monitoring": {
+      "State": "disabled"
+    },
+    "Placement": {
+      "AvailabilityZone": "us-east-2c",
+      "GroupName": "",
+      "Tenancy": "default"
+    },
+    "PrivateDnsName": "ip-172-31-34-78.us-east-2.compute.internal",
+    "PrivateIpAddress": "172.31.34.78",
+    "ProductCodes": [],
+    "PublicDnsName": "",
+    "State": {
+      "Code": 80,
+      "Name": "stopped"
+    },
+    "StateTransitionReason": "User initiated (2020-09-03 19:27:51 GMT)",
+    "SubnetId": "subnet-aaf395e6",
+    "VpcId": "vpc-a4954dcf",
+    "Architecture": "x86_64",
+    "BlockDeviceMappings": [
+      {
+        "DeviceName": "/dev/xvda",
+        "Ebs": {
+          "AttachTime": "2020-08-20T19:33:17+00:00",
+          "DeleteOnTermination": true,
+          "Status": "attached",
+          "VolumeId": "vol-0094318e0defc2b2f"
+        }
+      }
+    ],
+    "ClientToken": "",
+    "EbsOptimized": false,
+    "EnaSupport": true,
+    "Hypervisor": "xen",
+    "NetworkInterfaces": [
+      {
+        "Attachment": {
+          "AttachTime": "2020-08-20T19:33:16+00:00",
+          "AttachmentId": "eni-attach-0b68bc74506ff8ec9",
+          "DeleteOnTermination": true,
+          "DeviceIndex": 0,
+          "Status": "attached"
+        },
+        "Description": "",
+        "Groups": [
+          {
+            "GroupName": "launch-wizard-1",
+            "GroupId": "sg-08dba2380e835e2b3"
+          }
+        ],
+        "Ipv6Addresses": [],
+        "MacAddress": "0a:e2:6d:cf:78:86",
+        "NetworkInterfaceId": "eni-07c0195aaff193aad",
+        "OwnerId": "308413130039",
+        "PrivateDnsName": "ip-172-31-34-78.us-east-2.compute.internal",
+        "PrivateIpAddress": "172.31.34.78",
+        "PrivateIpAddresses": [
+          {
+            "Primary": true,
+            "PrivateDnsName": "ip-172-31-34-78.us-east-2.compute.internal",
+            "PrivateIpAddress": "172.31.34.78"
+          }
+        ],
+        "SourceDestCheck": true,
+        "Status": "in-use",
+        "SubnetId": "subnet-aaf395e6",
+        "VpcId": "vpc-a4954dcf",
+        "InterfaceType": "interface"
+      }
+    ],
+    "RootDeviceName": "/dev/xvda",
+    "RootDeviceType": "ebs",
+    "SecurityGroups": [
+      {
+        "GroupName": "launch-wizard-1",
+        "GroupId": "sg-08dba2380e835e2b3"
+      }
+    ],
+    "SourceDestCheck": true,
+    "StateReason": {
+      "Code": "Client.UserInitiatedShutdown",
+      "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+    },
+    "Tags": [
+      {
+        "Key": "rrBackupSystem",
+        "Value": "Custodian"
+      }
+    ],
+    "VirtualizationType": "hvm",
+    "CpuOptions": {
+      "CoreCount": 1,
+      "ThreadsPerCore": 1
+    },
+    "CapacityReservationSpecification": {
+      "CapacityReservationPreference": "open"
+    },
+    "HibernationOptions": {
+      "Configured": false
+    },
+    "MetadataOptions": {
+      "State": "applied",
+      "HttpTokens": "optional",
+      "HttpPutResponseHopLimit": 1,
+      "HttpEndpoint": "enabled"
+    }
+  }
+]

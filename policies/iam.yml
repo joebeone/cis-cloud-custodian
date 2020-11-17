@@ -1,0 +1,41 @@
+policies:
+  - name: avoid-the-use-of-the-root-account
+    resource: account
+    description: "AUDIT NOTIFICATION: CIS Benchmark 1.1 - Avoid the use of the root account The root account is the most privileged AWS account."
+    mode:
+       type: cloudtrail
+       role: "{custodian_role}"
+       events:
+          - ConsoleLogin
+    filters:
+       - type: event
+         key: "detail.userIdentity.type"
+         value_type: swap
+         op: in
+         value: Root
+    actions:
+      - type: notify
+        template: default.html
+        priority_header: 1
+        subject: "Root User Login Detected! - [{{ account }} - {{ region }}]"
+        violation_desc: "A User Has Logged Into the AWS Console With The Root User:"
+        action_desc: "Reference: CIS 1.1 Benchmark. Minimizing the use of this account."
+        to:
+          - jbennett@webrapids.com
+          - joe.bennett@redriver.com
+        transport:
+          type: sqs
+          queue: "{mailer_sqs_url}"
+          region: us-east-2
+
+
+
+
+
+
+
+          
+#custodian  run -c .\resource.yml -s output
+#c7n-org run -c .\accounts\accounts.yml -s output -u .\policies\iam.yml  
+#c7n-org run -c .\accounts\accounts.yml -s output -u .\policies\iam.yml  --dryrun    
+# aws iam get-credential-report --query 'Content' --output text | base64 -d | cut -d, -f1,5,11,16 | grep -B1 '<root_account>'

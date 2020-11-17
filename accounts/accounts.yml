@@ -1,0 +1,12 @@
+accounts:
+- account_id: '308413130039'
+  name: escalations-team
+  profile: riversysops
+  regions:
+  - us-east-1
+  - us-east-2
+  - us-west-1
+  vars:
+    custodian_role: red-river-cloud-custodian
+    mailer_sqs_url: https://sqs.us-east-2.amazonaws.com/308413130039/redriver-cloud-custodian
+

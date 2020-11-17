@@ -1,0 +1,3 @@
+policies:
+  - name: ec-2-resource-policy
+    resource: aws.ec2

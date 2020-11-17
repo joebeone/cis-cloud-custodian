@@ -1,0 +1,101 @@
+policies:
+  - name: ROOT
+    resource: account
+    description: "CIS Benchmark 1.1 - Avoid the use of the root account The root account is the most privileged AWS account."
+    mode:
+       type: hub-action
+       role: "{lambda_role}"
+       events:
+          - ConsoleLogin
+    filters:
+       - type: event
+         key: "detail.userIdentity.type"
+         value_type: swap
+         op: in
+         value: Root
+    actions:
+      - type: notify
+        template: default.html
+        priority_header: 1
+        subject: "Root User Login Detected! - [{{ account }} - {{ region }}]"
+        violation_desc: "A User Has Logged Into the AWS Console With The Root User:"
+        action_desc: "Reference: CIS 1.1 Benchmark. Minimizing the use of this account."
+        to:
+          - jbennett@webrapids.com
+          - joe.bennett@redriver.com
+        transport:
+          type: sqs
+          queue: https://sqs.{{ region }}.amazonaws.com/{{ account_id }}/redriver-cloud-custodian
+          region: us-east-1
+
+      - type: post-finding
+        severity_normalized: 30
+        severity_label: HIGH
+        compliance_status: FAILED
+        types:
+          - "Software and Configuration Checks/Industry and Regulatory Standards/CIS"
+  
+
+  - name: MFA
+    resource: iam-user
+    description: |
+      Reference: CIS 1.2 Benchmark. Notifies SD when user is missing Multi-Factor-Authentication CIS Benchmark 1.2 - Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password
+    mode:
+      type: hub-action
+      schedule: rate(1 day)
+      role: "{lambda_role}"
+    filters:
+      - type: credential
+        key: mfa_active
+        value: false
+      - type: credential
+        key: 
+    actions:
+      - type: notify
+        template: default.html
+        priority_header: 1
+        subject: "Users Missing Multifactor Authentication - [{{ account }} - {{ region }}]"
+        violation_desc: "A User Has Logged Into the AWS Console without MFA:"
+        action_desc: |
+            "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. 
+             Investigate using IAM, contact the user, and setup MFA for the account.
+             
+             Enabling MFA provides increased security for console access as it requires the authenticating principal to 
+             possess a device that emits a time-sensitive key and have knowledge of a credential.
+
+            Reference: CIS Benchmark.
+            AWS: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html 
+            "
+        to:
+          - jbennett@webrapids.com
+          - joe.bennett@redriver.com
+        transport:
+          type: sqs
+          queue: https://sqs.{{ region }}.amazonaws.com/{{ account_id }}/redriver-cloud-custodian
+          region: us-east-1
+
+      - type: post-finding
+        severity_normalized: 30
+        severity_label: HIGH
+        compliance_status: FAILED
+        types:
+          - "Software and Configuration Checks/Industry and Regulatory Standards/CIS"
+  
+policies:
+  - name: avoid-the-use-of-the-root-account
+    resource: iam-user
+    description: "AUDIT: CIS Benchmark 1.1 - Avoid the use of the root account The root account is the most privileged AWS account."
+    mode:
+      type: periodic
+      schedule: rate(1 day)
+      role: "{lambda_role}"
+    filter:
+      - type: credential
+        key: user
+        value: root
+      - type: credential
+        key: password_last_used
+        value_type: age
+        value: 1
+        op: less-than
+
